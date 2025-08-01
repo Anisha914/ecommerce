@@ -1,6 +1,12 @@
 package com.example.ecommerce.controller;
+
+import com.example.ecommerce.entity.User;
+import com.example.ecommerce.repository.UserRepository;
+import com.example.ecommerce.service.Autowired;
+import com.example.ecommerce.service.PasswordEncoder;
+
 @Controller
-public class AuthController {
+public class AuthController<Authentication> {
     @Autowired
     private UserRepository userRepository;
 

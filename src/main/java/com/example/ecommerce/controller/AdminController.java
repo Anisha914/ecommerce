@@ -1,21 +1,36 @@
 package com.example.ecommerce.controller;
 
-public class AdminController {
+import com.example.ecommerce.entity.Order;
+import com.example.ecommerce.entity.Product;
+import jdk.internal.classfile.impl.BufferedCodeBuilder;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.List;
+import java.util.UUID;
+
+import static java.nio.file.Files.copy;
+
+public class AdminController<MultipartFile> {
     @Controller
     @RequestMapping("/admin")
-    public class AdminController {
+
 
         @Autowired
         private ProductRepository productRepository;
 
         @GetMapping("/dashboard")
-        public String adminDashboard(Model model) {
+        public String adminDashboard(BufferedCodeBuilder.Model model) {
             model.addAttribute("products", productRepository.findAll());
             return "admin-dashboard";
         }
 
         @GetMapping("/product/add")
-        public String showAddProductForm(Model model) {
+        public String showAddProductForm(BufferedCodeBuilder.Model model) {
             model.addAttribute("product", new Product());
             return "add-product";
         }
@@ -39,7 +54,7 @@ public class AdminController {
 // Save file
                 Path filePath = Paths.get(uploadFolder.getAbsolutePath(), fileName);
                 System.out.println(filePath);
-                Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+                copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
 // Store only file name in DB
                 product.setImageName(fileName);
@@ -54,7 +69,7 @@ public class AdminController {
         }
 
         @GetMapping("/product/edit/{id}")
-        public String editProduct(@PathVariable Long id, Model model) {
+        public String editProduct(@PathVariable Long id, BufferedCodeBuilder.Model model) {
             Product product = productRepository.findById(id).orElse(null);
             model.addAttribute("product", product);
             return "add-product";
@@ -71,10 +86,10 @@ public class AdminController {
         private OrderRepository orderRepository;
 
         @GetMapping("/orders")
-        public String viewAllOrders(Model model) {
+        public String viewAllOrders(BufferedCodeBuilder.Model model) {
             List<Order> orders = orderRepository.findAll();
             model.addAttribute("orders", orders);
             return "admin-orders";
         }
     }
-}
+

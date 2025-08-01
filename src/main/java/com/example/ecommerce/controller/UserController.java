@@ -1,5 +1,18 @@
 package com.example.ecommerce.controller;
 
+import com.example.ecommerce.entity.Order;
+import com.example.ecommerce.entity.OrderItem;
+import com.example.ecommerce.entity.Product;
+import com.example.ecommerce.service.Autowired;
+import com.example.ecommerce.service.EmailService;
+import jdk.internal.classfile.impl.BufferedCodeBuilder;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class UserController {
     @Controller
     @RequestMapping("/user")
@@ -22,7 +35,7 @@ public class UserController {
         }
 
         @GetMapping("/dashboard")
-        public String userDashboard(Model model) {
+        public String userDashboard(BufferedCodeBuilder.Model model) {
             model.addAttribute("products", productRepository.findAll());
             return "user-dashboard";
         }
@@ -61,7 +74,7 @@ public class UserController {
 
 
         @GetMapping("/cart")
-        public String viewCart(@ModelAttribute("cart") List<Product> cart, Model model) {
+        public String viewCart(@ModelAttribute("cart") List<Product> cart, BufferedCodeBuilder.Model model) {
             double total = cart.stream().mapToDouble(Product::getPrice).sum();
             model.addAttribute("cart", cart);
             model.addAttribute("total", total);
@@ -96,7 +109,7 @@ public class UserController {
 
         @GetMapping("/checkout")
         public String checkout(@ModelAttribute("cart") List<Product> cart,
-                               Model model,
+                               BufferedCodeBuilder.Model model,
                                Authentication authentication,
                                SessionStatus sessionStatus) {
             if (cart.isEmpty()) {
@@ -148,7 +161,7 @@ public class UserController {
         }
 
         @GetMapping("/orders")
-        public String userOrders(Model model, Authentication authentication) {
+        public String userOrders(BufferedCodeBuilder.Model model, Authentication authentication) {
             List<Order> orders = orderRepository.findByUserEmail(authentication.getName());
             model.addAttribute("orders", orders);
             return "order-history";
