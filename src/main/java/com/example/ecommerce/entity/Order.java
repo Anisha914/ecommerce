@@ -3,6 +3,9 @@ package com.example.ecommerce.entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
+
 
     @Entity
 
@@ -67,4 +70,17 @@ import java.util.List;
         public void setItems(List<OrderItem> items) {
             this.items = items;
         }
+
+        @Override
+        public String toString() {
+            return "Order{" +
+                    "id=" + id +
+                    ", userEmail='" + userEmail + '\'' +
+                    ", orderDate=" + orderDate +
+                    ", totalAmount=" + totalAmount +
+                    ", items=" + items +
+                    '}';
+        }
     }
+
+

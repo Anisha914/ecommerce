@@ -13,12 +13,8 @@ package com.example.ecommerce.entity;
         private Long
                 id;
 
-        @ManyToOne
-
         private Order
                 order;
-
-        @ManyToOne
 
         private Product
                 product;

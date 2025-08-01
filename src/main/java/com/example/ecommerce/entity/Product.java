@@ -4,6 +4,8 @@ package com.example.ecommerce.entity;
 
     public class Product {
 
+
+
         @Id
 
         @GeneratedValue
@@ -71,4 +73,17 @@ package com.example.ecommerce.entity;
         public void setStock(int stock) {
             this.stock = stock;
         }
+
+        @Override
+        public String toString() {
+            return "Product{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", description='" + description + '\'' +
+                    ", price=" + price +
+                    ", imageName='" + imageName + '\'' +
+                    ", stock=" + stock +
+                    '}';
+        }
     }
+

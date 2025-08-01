@@ -4,8 +4,8 @@ import com.example.ecommerce.entity.User;
 import com.example.ecommerce.repository.UserRepository;
 import com.example.ecommerce.service.Autowired;
 import com.example.ecommerce.service.PasswordEncoder;
+import com.example.ecommerce.service.AuthService;
 
-@Controller
 public class AuthController<Authentication> {
     @Autowired
     private UserRepository userRepository;
@@ -24,7 +24,7 @@ public class AuthController<Authentication> {
     }
 
     @PostMapping("/doRegister")
-    public String doRegister(@ModelAttribute User user) {
+    public String doRegister(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole("ROLE_USER"); // default
         userRepository.save(user);
@@ -33,7 +33,7 @@ public class AuthController<Authentication> {
 
     @GetMapping("/default")
     public String defaultAfterLogin(Authentication authentication) {
-        String role = authentication.getAuthorities().iterator().next().getAuthority();
+        String role = String.valueOf(authentication.getClass().isRecord());
         if (role.equals("ROLE_ADMIN")) {
             return "redirect:/admin/dashboard";
         } else {
