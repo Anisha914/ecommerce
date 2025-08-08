@@ -1,7 +1,11 @@
 package com.example.ecommerce.service;
 
+import org.springframework.mail.SimpleMailMessage;
+
+import static java.lang.Long.parseLong;
+
 @Service
-public class EmailService<SimpleMailMessage> {
+public class EmailService {
 
     @Autowired
     private JavaMailSender mailSender;
@@ -15,4 +19,3 @@ public class EmailService<SimpleMailMessage> {
         mailSender.send(message);
     }
 }
-
