@@ -2,15 +2,12 @@ package com.example.ecommerce.controller;
 
 import com.example.ecommerce.entity.User;
 import com.example.ecommerce.repository.UserRepository;
-import com.example.ecommerce.service.Autowired;
-import com.example.ecommerce.service.PasswordEncoder;
 import com.example.ecommerce.service.AuthService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class AuthController<Authentication> {
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
@@ -41,6 +38,5 @@ public class AuthController<Authentication> {
         }
     }
 
-    @Autowired
     private AuthService authService;
 }

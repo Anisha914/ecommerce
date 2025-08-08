@@ -3,7 +3,7 @@ package com.example.ecommerce.controller;
 import com.example.ecommerce.entity.Order;
 import com.example.ecommerce.entity.OrderItem;
 import com.example.ecommerce.entity.Product;
-import com.example.ecommerce.service.Autowired;
+import com.example.ecommerce.repository.ProductRepository;
 import com.example.ecommerce.service.EmailService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
@@ -24,13 +24,10 @@ import java.util.Map;
 @SessionAttributes("cart")
 public class UserController {
 
-    @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
     private EmailService emailService;
 
-    @Autowired
     private OrderRepository orderRepository;
 
     public List<Product> cart() {

@@ -2,16 +2,15 @@ package com.example.ecommerce.service;
 
 import com.example.ecommerce.entity.User;
 import com.example.ecommerce.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
 @Service
 public class AuthService {
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     // Register new user
