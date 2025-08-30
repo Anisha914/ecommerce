@@ -1,14 +1,8 @@
 package com.example.ecommerce.entity;
 
-    @Entity
-
     public class User {
 
 
-
-        @Id
-
-        @GeneratedValue
 
         private Long
                 id;
