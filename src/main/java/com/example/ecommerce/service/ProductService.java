@@ -4,6 +4,7 @@ import com.example.ecommerce.entity.Product;
 import com.example.ecommerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -17,7 +18,7 @@ public class ProductService {
     }
 
     // Fetch product by ID
-    public ScopedValue<Object> getProductById(Long id) {
+    public Optional<Product> getProductById(Long id) {
         return productRepository.findById(id);
     }
 
