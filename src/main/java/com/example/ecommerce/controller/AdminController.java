@@ -20,9 +20,8 @@ public class AdminController {
 
     @Autowired
     private ProductRepository productRepository;
-
-    @Autowired
     private OrderRepository orderRepository;
+
 
     @GetMapping("/dashboard")
     public String adminDashboard(Model model) {
